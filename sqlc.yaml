@@ -1,0 +1,15 @@
+version: "2"
+plugins:
+  - name: ts-d1
+    wasm:
+      url: "https://github.com/orisano/sqlc-gen-ts-d1/releases/download/v0.0.0-a/sqlc-gen-ts-d1.wasm"
+      sha256: "a3d312f03e80d6530ea7be50c1b39cf2e34cfa846d91751973ed078cb2cddecc"
+sql:
+  - schema: database/schema.sql
+    queries: database/query/
+    engine: sqlite
+    codegen:
+      - out: app/__generated__/sqlc
+        plugin: ts-d1
+        options:
+          workers-types: experimental

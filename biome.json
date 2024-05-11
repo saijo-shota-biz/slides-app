@@ -4,12 +4,24 @@
     "enabled": true
   },
   "formatter": {
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "ignore": [
+      "node_modules",
+      "build",
+      "dist",
+      "app/__generated__"
+    ]
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true
-    }
+    },
+    "ignore": [
+      "node_modules",
+      "build",
+      "dist",
+      "app/__generated__"
+    ]
   }
 }

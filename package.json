@@ -11,7 +11,9 @@
     "format": "npx @biomejs/biome format --write ./app",
     "start": "wrangler pages dev ./build/client",
     "typecheck": "tsc",
-    "typegen": "wrangler types"
+    "typegen": "wrangler types",
+    "db:local:migration": "npx wrangler d1 execute slides-app-db --local --file=./database/schema.sql",
+    "db:local:seed": "npx wrangler d1 execute slides-app-db --local --file=./database/seed.sql"
   },
   "dependencies": {
     "@radix-ui/react-navigation-menu": "^1.1.4",
