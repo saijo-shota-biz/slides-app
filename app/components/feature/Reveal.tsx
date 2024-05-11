@@ -1,6 +1,6 @@
-import {useCallback, useRef} from "react";
-import {getReveal} from "~/utils/reveal.client";
-import type {Api} from "reveal.js";
+import { useCallback, useRef } from "react";
+import { getReveal } from "~/utils/reveal.client";
+import type { Api } from "reveal.js";
 
 type Props = {
   url: string;
@@ -12,7 +12,7 @@ export const Reveal = ({ url }: Props) => {
   const deckDivRefCallback = useCallback((node: HTMLDivElement | null) => {
     if (node) {
       deckDivRef.current = node;
-      deckRef.current = getReveal(node);
+      deckRef.current = getReveal(node, { showNotes: false });
       deckRef.current.initialize().then(() => {
         // good place for event handlers and plugin setups
       });

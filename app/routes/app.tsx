@@ -27,8 +27,8 @@ export default function AppRoute() {
                   asChild
                   className={navigationMenuTriggerStyle()}
                 >
-                  <Link to={"/app/transactions"} prefetch={"none"}>
-                    Transactions
+                  <Link to={"/app/logout"} prefetch={"none"}>
+                    Logout
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>

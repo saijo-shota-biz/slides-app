@@ -12,7 +12,7 @@ export const RevealContainer = ({ children }: { children: ReactNode }) => {
   const refCallback = useCallback((node: HTMLDivElement | null) => {
     if (node) {
       ref.current = node;
-      setHeight(node.clientWidth * 0.5625);
+      setHeight(node.clientWidth * 0.5625); // 16:9 aspect ratio
     } else {
       ref.current = null;
       setHeight(0);
