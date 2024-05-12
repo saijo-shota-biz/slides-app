@@ -58,6 +58,54 @@ export function getUser(
   }
 }
 
+const getUserByEmailQuery = `-- name: GetUserByEmail :one
+SELECT id, created_at, updated_at, email, username
+FROM users
+WHERE email = ?1`;
+
+export type GetUserByEmailParams = {
+  email: string;
+};
+
+export type GetUserByEmailRow = {
+  id: string;
+  createdAt: string | null;
+  updatedAt: string | null;
+  email: string;
+  username: string;
+};
+
+type RawGetUserByEmailRow = {
+  id: string;
+  created_at: string | null;
+  updated_at: string | null;
+  email: string;
+  username: string;
+};
+
+export function getUserByEmail(
+  d1: D1Database,
+  args: GetUserByEmailParams
+): Query<GetUserByEmailRow | null> {
+  const ps = d1
+    .prepare(getUserByEmailQuery)
+    .bind(args.email);
+  return {
+    then(onFulfilled?: (value: GetUserByEmailRow | null) => void, onRejected?: (reason?: any) => void) {
+      ps.first<RawGetUserByEmailRow | null>()
+        .then((raw: RawGetUserByEmailRow | null) => raw ? {
+          id: raw.id,
+          createdAt: raw.created_at,
+          updatedAt: raw.updated_at,
+          email: raw.email,
+          username: raw.username,
+        } : null)
+        .then(onFulfilled).catch(onRejected);
+    },
+    batch() { return ps; },
+  }
+}
+
 const listUsersQuery = `-- name: ListUsers :many
 SELECT id, created_at, updated_at, email, username
 FROM users`;
@@ -102,9 +150,10 @@ export function listUsers(
   }
 }
 
-const createUserQuery = `-- name: CreateUser :exec
+const createUserQuery = `-- name: CreateUser :one
 INSERT INTO users (id, email, username)
-VALUES (?1, ?2, ?3)`;
+VALUES (?1, ?2, ?3)
+RETURNING id, created_at, updated_at, email, username`;
 
 export type CreateUserParams = {
   id: string;
@@ -112,16 +161,39 @@ export type CreateUserParams = {
   username: string;
 };
 
+export type CreateUserRow = {
+  id: string;
+  createdAt: string | null;
+  updatedAt: string | null;
+  email: string;
+  username: string;
+};
+
+type RawCreateUserRow = {
+  id: string;
+  created_at: string | null;
+  updated_at: string | null;
+  email: string;
+  username: string;
+};
+
 export function createUser(
   d1: D1Database,
   args: CreateUserParams
-): Query<D1Result> {
+): Query<CreateUserRow | null> {
   const ps = d1
     .prepare(createUserQuery)
     .bind(args.id, args.email, args.username);
   return {
-    then(onFulfilled?: (value: D1Result) => void, onRejected?: (reason?: any) => void) {
-      ps.run()
+    then(onFulfilled?: (value: CreateUserRow | null) => void, onRejected?: (reason?: any) => void) {
+      ps.first<RawCreateUserRow | null>()
+        .then((raw: RawCreateUserRow | null) => raw ? {
+          id: raw.id,
+          createdAt: raw.created_at,
+          updatedAt: raw.updated_at,
+          email: raw.email,
+          username: raw.username,
+        } : null)
         .then(onFulfilled).catch(onRejected);
     },
     batch() { return ps; },

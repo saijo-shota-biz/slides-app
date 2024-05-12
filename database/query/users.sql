@@ -3,13 +3,19 @@ SELECT *
 FROM users
 WHERE id = @id;
 
+-- name: GetUserByEmail :one
+SELECT *
+FROM users
+WHERE email = @email;
+
 -- name: ListUsers :many
 SELECT *
 FROM users;
 
--- name: CreateUser :exec
+-- name: CreateUser :one
 INSERT INTO users (id, email, username)
-VALUES (@id, @email, @username);
+VALUES (@id, @email, @username)
+RETURNING *;
 
 -- name: UpdateUserUsername :one
 UPDATE users

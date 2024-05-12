@@ -13,9 +13,10 @@
     "start": "wrangler pages dev ./build/client",
     "typecheck": "tsc",
     "typegen": "wrangler types",
-    "db:local:reset": "npx wrangler d1 execute slides-app-db --local --file=./database/schema.sql && sqlc generate",
+    "db:local:reset": "npx wrangler d1 execute slides-app-db --local --file=./database/schema.sql && npm run sqlc:generate",
     "db:local:seed": "npx wrangler d1 execute slides-app-db --local --file=./database/seed.sql",
-    "db:local:init": "npm run db:local:reset && npm run db:local:seed && sqlc generate"
+    "db:local:init": "npm run db:local:reset && npm run db:local:seed && npm run sqlc:generate",
+    "sqlc:generate": "sqlc generate"
   },
   "dependencies": {
     "@radix-ui/react-navigation-menu": "^1.1.4",
@@ -23,18 +24,23 @@
     "@remix-run/cloudflare": "^2.8.1",
     "@remix-run/cloudflare-pages": "^2.8.1",
     "@remix-run/react": "^2.8.1",
+    "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.18",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "date-fns": "^3.6.0",
     "isbot": "^4.1.0",
     "lucide-react": "^0.359.0",
     "miniflare": "^3.20231030.4",
     "postcss": "^8.4.37",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "remix-auth": "^3.6.0",
+    "remix-auth-google": "^2.0.0",
     "reveal.js": "^5.0.5",
     "tailwind-merge": "^2.2.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.1",
