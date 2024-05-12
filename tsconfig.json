@@ -25,7 +25,6 @@
     "paths": {
       "~/*": ["./app/*"]
     },
-    "exclude": ["node_modules", "app/__generated__"],
     // Vite takes care of building everything, not tsc.
     "noEmit": true
   }

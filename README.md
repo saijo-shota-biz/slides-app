@@ -39,6 +39,11 @@ First, build your app for production:
 npm run build
 ```
 
+Second, migrate the database:
+```sh
+npm run deploy:database
+```
+
 Then, deploy your app to Cloudflare Pages:
 
 ```sh
@@ -46,3 +51,27 @@ npm run deploy
 ```
 
 [bindings]: https://developers.cloudflare.com/pages/functions/bindings/
+
+## Database
+### initialize local database
+```sh
+npm run db:local:init
+```
+### migration
+create migration
+https://developers.cloudflare.com/workers/wrangler/commands/#migrations-create
+```sh
+wrangler d1 migrations create slides-app-db [migration-name]
+```
+
+migration list
+https://developers.cloudflare.com/workers/wrangler/commands/#migrations-list
+```sh
+wrangler d1 migrations list slides-app-db --local
+```
+
+migration apply
+https://developers.cloudflare.com/workers/wrangler/commands/#migrations-apply
+```sh
+wrangler d1 migrations apply slides-app-db --local
+```

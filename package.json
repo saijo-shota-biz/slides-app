@@ -6,14 +6,16 @@
   "scripts": {
     "build": "remix vite:build",
     "deploy": "wrangler pages deploy ./build/client",
+    "deploy:database": "npx wrangler d1 execute slides-app-db --remote --file=./database/schema.sql && wrangler d1 migrations apply slides-app-db --remote",
     "dev": "remix vite:dev",
     "lint": "npx @biomejs/biome lint --apply ./app",
     "format": "npx @biomejs/biome format --write ./app",
     "start": "wrangler pages dev ./build/client",
     "typecheck": "tsc",
     "typegen": "wrangler types",
-    "db:local:migration": "npx wrangler d1 execute slides-app-db --local --file=./database/schema.sql",
-    "db:local:seed": "npx wrangler d1 execute slides-app-db --local --file=./database/seed.sql"
+    "db:local:reset": "npx wrangler d1 execute slides-app-db --local --file=./database/schema.sql && sqlc generate",
+    "db:local:seed": "npx wrangler d1 execute slides-app-db --local --file=./database/seed.sql",
+    "db:local:init": "npm run db:local:reset && npm run db:local:seed && sqlc generate"
   },
   "dependencies": {
     "@radix-ui/react-navigation-menu": "^1.1.4",
