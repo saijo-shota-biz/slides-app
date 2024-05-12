@@ -8,4 +8,5 @@ interface Env {
   GOOGLE_CALLBACK_URL: string;
   SESSION_SECRET: string;
   SESSION_KV: D1KvNamespace;
+  MY_DURABLE_OBJECT: DurableObjectNamespace;
 }
