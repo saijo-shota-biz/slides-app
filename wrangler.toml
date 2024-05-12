@@ -33,10 +33,10 @@ database_id = "4d725f90-39fa-4362-8320-39be0c64898b"
 # Bind a Durable Object. Durable objects are a scale-to-zero compute primitive based on the actor model.
 # Durable Objects can live for as long as needed. Use these when you need a long-running "server", such as in realtime apps.
 # Docs: https://developers.cloudflare.com/workers/runtime-apis/durable-objects
-[[durable_objects]]
-name = "MY_DURABLE_OBJECT"
-class_name = "MyDurableObject"
-script_name = 'slide-app-durable-object'
+#[[durable_objects.bindings]]
+#name = "MY_DURABLE_OBJECT"
+#class_name = "MyDurableObject"
+#script_name = 'slide-app-durable-object'
 
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#kv-namespaces
