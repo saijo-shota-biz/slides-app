@@ -10,7 +10,7 @@
     "dev": "remix vite:dev",
     "lint": "npx @biomejs/biome lint --apply ./app",
     "format": "npx @biomejs/biome format --write ./app",
-    "start": "wrangler pages dev ./build/client",
+    "start": "wrangler pages dev ./build/client --do MY_DURABLE_OBJECT=MyDurableObject@slide-app-durable-object",
     "typecheck": "tsc",
     "typegen": "wrangler types",
     "db:local:reset": "npx wrangler d1 execute slides-app-db --local --file=./database/schema.sql && npm run sqlc:generate",
